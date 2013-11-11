@@ -11,11 +11,11 @@ def elle_url(sign)
 	"http://www.elle.com/horoscopes/daily/" + sign + "-daily-horoscope"
 end
 
-def bro_it_up(scope)
+def bro_it_up(horoscope)
 	SUBS.each do |sub|
-		scope.gsub!(sub[0],sub[1])
+		horoscope.gsub!(sub[0],sub[1])
 	end
-	scope
+	horoscope
 end
 
 SIGNS.each do |sign|
