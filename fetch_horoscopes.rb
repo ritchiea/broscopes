@@ -1,9 +1,9 @@
 require "nokogiri"
 require 'open-uri'
 
-SUBS = [ ['aquarius','broquarius'], ['friends','brahs']].freeze
+SUBS = [ ['Aquarius','Broquarius'], ['friends','brahs']].freeze
 
-SIGNS = ["aquarius", "pisces", "aries", "taurus", "gemini", "cancer", "leo", 
+SIGNS = ["aquarius", "pisces", "aries", "taurus", "gemini", "cancer", "leo",
 		 "virgo", "libra", "scorpio", "sagittarius", "capricorn" ].freeze
 
 def elle_url(sign)
