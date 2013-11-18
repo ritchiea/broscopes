@@ -1,0 +1,5 @@
+ource 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'nokogiri'
+gem 'open-uri'
