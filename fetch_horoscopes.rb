@@ -3,8 +3,6 @@ require 'open-uri'
 require 'pg'
 require 'time'
 
-SUBS = [ ['Aquarius','Broquarius'], ['friends','brahs']].freeze
-
 SIGNS = ["aquarius", "pisces", "aries", "taurus", "gemini", "cancer", "leo",
 		 "virgo", "libra", "scorpio", "sagittarius", "capricorn" ].freeze
 
@@ -22,13 +20,6 @@ SQL
 def elle_url(sign)
 	return nil if !SIGNS.include?(sign.downcase)
 	"http://www.elle.com/horoscopes/daily/" + sign + "-daily-horoscope"
-end
-
-def bro_it_up(horoscope)
-	SUBS.each do |sub|
-		horoscope.gsub!(sub[0],sub[1])
-	end
-	horoscope
 end
 
 def fetch_signs(connection)

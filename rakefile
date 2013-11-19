@@ -1,0 +1,51 @@
+require "nokogiri"
+require 'open-uri'
+require 'pg'
+require 'time'
+
+SIGNS = ["aquarius", "pisces", "aries", "taurus", "gemini", "cancer", "leo",
+		 "virgo", "libra", "scorpio", "sagittarius", "capricorn" ].freeze
+
+def connect_to_db
+  if ENV['environment'] != 'production'
+    @conn = PG::Connection.open(dbname: 'broscopes')
+  else
+    @conn = PG::Connection.new( {hostaddr: ENV['DATABASE_URL'] } )
+  end
+end
+
+namespace :db do
+  task :create_table_horoscopes do
+    connect_to_db
+    @conn.exec <<-SQL
+     CREATE TABLE IF NOT EXISTS horoscopes (
+     id SERIAL PRIMARY KEY,
+     content text NOT NULL,
+     sign varchar(255) NOT NULL,
+     source varchar(255) NOT NULL,
+     time timestamp
+     );
+    SQL
+    @conn.close
+  end
+end
+
+def elle_url(sign)
+	return nil if !SIGNS.include?(sign.downcase)
+	"http://www.elle.com/horoscopes/daily/" + sign + "-daily-horoscope"
+end
+
+task :fetch_elle do
+  connect_to_db
+  SIGNS.each do |sign|
+    doc = Nokogiri::HTML(open(elle_url(sign)))
+
+    doc.css(".bodySign").each do |result|
+      puts "Adding...\n #{result.content.strip}"
+      @conn.exec_params("INSERT INTO horoscopes (content,sign,source,time) VALUES ($1, $2, $3, $4)",
+        [result.content.strip,sign,'elle',Time.now])
+    end
+  end
+  @conn.close
+end
+
