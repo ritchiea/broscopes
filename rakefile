@@ -2,18 +2,12 @@ require "nokogiri"
 require 'open-uri'
 require 'pg'
 require 'time'
+require './pgconnect'
+
+include PgConnect
 
 SIGNS = ["aquarius", "pisces", "aries", "taurus", "gemini", "cancer", "leo",
      "virgo", "libra", "scorpio", "sagittarius", "capricorn" ].freeze
-
-def connect_to_db
-  if ENV['environment'] != 'production'
-    @conn = PG::Connection.open(dbname: 'broscopes')
-  else
-    db = URI.parse(ENV['DATABASE_URL'])
-    @conn = PG::Connection.new( {host: db.host, user: db.user, port: db.port, password: db.password, dbname:db.path[1..-1] } )
-  end
-end
 
 namespace :db do
   desc 'create horoscopes table'
