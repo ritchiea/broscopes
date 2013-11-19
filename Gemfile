@@ -1,5 +1,6 @@
-ource 'https://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'nokogiri'
-gem 'open-uri'
+gem 'pg'
+gem 'haml'
