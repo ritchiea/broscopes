@@ -23,4 +23,4 @@ DEPENDENCIES
   haml
   nokogiri
   pg
-  sinatra
+  sinatra (= 1.4.4)
