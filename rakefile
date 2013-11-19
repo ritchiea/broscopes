@@ -4,7 +4,7 @@ require 'pg'
 require 'time'
 
 SIGNS = ["aquarius", "pisces", "aries", "taurus", "gemini", "cancer", "leo",
-		 "virgo", "libra", "scorpio", "sagittarius", "capricorn" ].freeze
+     "virgo", "libra", "scorpio", "sagittarius", "capricorn" ].freeze
 
 def connect_to_db
   if ENV['environment'] != 'production'
@@ -15,6 +15,7 @@ def connect_to_db
 end
 
 namespace :db do
+  desc 'create horoscopes table'
   task :create_table_horoscopes do
     connect_to_db
     @conn.exec <<-SQL
@@ -31,10 +32,11 @@ namespace :db do
 end
 
 def elle_url(sign)
-	return nil if !SIGNS.include?(sign.downcase)
-	"http://www.elle.com/horoscopes/daily/" + sign + "-daily-horoscope"
+  return nil if !SIGNS.include?(sign.downcase)
+  "http://www.elle.com/horoscopes/daily/" + sign + "-daily-horoscope"
 end
 
+desc 'fetch horoscopes'
 task :fetch_elle do
   connect_to_db
   SIGNS.each do |sign|
@@ -48,4 +50,3 @@ task :fetch_elle do
   end
   @conn.close
 end
-
