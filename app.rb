@@ -13,7 +13,8 @@ before do
   if ENV['environment'] == 'dev'
     @conn = PG::Connection.open(dbname: 'broscopes')
   else
-    @conn = PG::Connection.new( {hostaddr: ENV['DATABASE_URL'] } )
+    db = URI.parse(ENV['DATABASE_URL'])
+    @conn = PG::Connection.new( {host: db.host, user: db.user, port: db.port, password: db.password, dbname:db.path[1..-1] } )
   end
 end
 
