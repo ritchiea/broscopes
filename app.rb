@@ -7,7 +7,9 @@ if ENV['environment'] != 'production'
   Dotenv.load
 end
 
-SUBS = [ ['Aquarius','Broquarius'], ['friend','brah']].freeze
+SUBS = [ ['Aquarius','Broquarius'],
+         ['friend','brah']
+        ].freeze
 
 before do
   if ENV['environment'] == 'dev'
