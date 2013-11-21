@@ -15,7 +15,7 @@ SUBS = [ ['Aquarius','Broquarius'],
         ].freeze
 
 before do
-  connect_to_db
+  @conn = connect_to_db
 end
 
 after do
