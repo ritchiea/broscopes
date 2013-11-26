@@ -11,7 +11,15 @@ end
 include PgConnect
 
 SUBS = [ ['Aquarius','Broquarius'],
-         ['friend','brah']
+         ['single','eligible'],
+         ['money','stacks'],
+         ['Leo','Lebro'],
+         ['friends','bros'],
+         ['friend','brah'],
+         ['dating','hanging out'],
+         ['flirt','hit on'],
+         ['salad','burger'],
+         ['yoga','golf']
         ].freeze
 
 before do
