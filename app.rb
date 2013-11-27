@@ -56,8 +56,8 @@ def parse_row(row)
 end
 
 def bro_it_up(horoscope)
-	SUBS.each do |sub|
-		horoscope.gsub!(sub[0],sub[1])
-	end
-	horoscope
+  SUBS.each do |sub|
+    horoscope.gsub!(sub[0],sub[1])
+  end
+  horoscope
 end
