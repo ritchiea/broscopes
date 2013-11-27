@@ -22,6 +22,13 @@ SUBS = [ ['Aquarius','Broquarius'],
          ['yoga','golf']
         ].freeze
 
+QUERY = <<-SQL
+  select * from horoscopes as h
+    where h.time > ($1)
+    order by time desc
+    limit 12
+  SQL
+
 before do
   @conn = connect_to_db
 end
@@ -32,7 +39,7 @@ end
 
 get '/' do
   @scopes = []
-  @conn.exec_params 'select * from horoscopes as h where h.time > ($1) order by time desc limit 12', [Time.now-(24*60*60)] do |result|
+  @conn.exec_params QUERY, [Time.now-(24*60*60)] do |result|
     result.each_row { |row| @scopes << parse_row(row) }
   end
   haml :home, format: :html5, locals: { scopes: @scopes }
