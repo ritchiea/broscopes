@@ -11,16 +11,24 @@ end
 include PgConnect
 
 SUBS = [ ['Aquarius','Broquarius'],
+         ['friend','brah'],
          ['single','eligible'],
          ['money','stacks'],
          ['Leo','Lebro'],
          ['friends','bros'],
-         ['friend','brah'],
          ['dating','hanging out'],
          ['flirt','hit on'],
          ['salad','burger'],
-         ['yoga','golf']
-        ].freeze
+         ['yoga','golf'],
+         ['retail therapy','treat yo self'],
+         ['spree, sesh'],
+         ['session','sesh'],
+         ['budget','bank roll'],
+         ['Sunday','Sunday Funday'],
+         ['conversation','real talk'],
+         ['date','hook up'],
+         ['relationship','relationship (bros b4 hoes)']
+         ].freeze
 
 ROOT_QUERY = <<-SQL
   select * from horoscopes as h
