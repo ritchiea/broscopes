@@ -3,7 +3,6 @@ require 'pg'
 require 'time'
 require 'json'
 require './pgconnect'
-require 'pry'
 if ENV['environment'] != 'production'
   require 'dotenv'
   Dotenv.load
