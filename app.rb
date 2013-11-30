@@ -3,6 +3,7 @@ require 'pg'
 require 'time'
 require 'json'
 require './pgconnect'
+require 'pry'
 if ENV['environment'] != 'production'
   require 'dotenv'
   Dotenv.load
@@ -21,7 +22,7 @@ SUBS = [ ['Aquarius','Broquarius'],
          ['salad','burger'],
          ['yoga','golf'],
          ['retail therapy','treat yo self'],
-         ['spree, sesh'],
+         ['spree', 'sesh'],
          ['session','sesh'],
          ['budget','bank roll'],
          ['Sunday','Sunday Funday'],
@@ -48,7 +49,7 @@ end
 get '/' do
   @scopes = []
   @conn.exec_params ROOT_QUERY, [Time.now-(24*60*60)] do |result|
-    result.each_row { |row| @scopes << parse_row(row) }
+    result.each_row { |row| puts "HOROSCOPE for #{row[2]}...\n#{row[1]}"; @scopes << parse_row(row) }
   end
   haml :home, format: :html5, locals: { scopes: @scopes }
 end
