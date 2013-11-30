@@ -27,6 +27,10 @@ SUBS = [ ['Aquarius','Broquarius'],
          ['Sunday','Sunday Funday'],
          ['conversation','real talk'],
          ['date','hook up'],
+         ['conflict', 'beef'],
+         ['sexy', 'smokin'],
+         ['good', 'primo'],
+         ['fun', 'mad fun'],
          ['relationship','relationship (bros b4 hoes)']
          ].freeze
 
