@@ -4,6 +4,7 @@ require 'time'
 require 'json'
 require './pgconnect'
 if ENV['environment'] != 'production'
+  require 'pry'
   require 'dotenv'
   Dotenv.load
 end
@@ -12,6 +13,7 @@ include PgConnect
 
 SUBS = [ ["\u0085", '...'],
          ["\u0092", "'"],
+         ["\u0097", "-"],
          ['Aquarius','Broquarius'],
          [/ friend[^l]/,' brah'],
          ['soiree','house party'],
@@ -67,7 +69,7 @@ get '/' do
   @conn.exec_params ROOT_QUERY, [Time.now-(24*60*60)] do |result|
     result.each_row { |row| @scopes << parse_row(row) }
   end
-  erb :home, format: :html5, locals: { scopes: @scopes }
+  haml :home, format: :html5, locals: { scopes: @scopes }
 end
 
 def parse_row(row)
