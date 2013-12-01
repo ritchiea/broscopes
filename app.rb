@@ -27,12 +27,12 @@ SUBS = [ ["\u0085", '...'],
          ['retail therapy','treat yo self'],
          ['spree', 'sesh'],
          ['spin class', 'crossfit'],
-         [/\ session\ /,' sesh'],
+         [' session ',' sesh '],
          ['budget','bank roll'],
          ['Sunday','Sunday Funday'],
          ['conversation','real talk'],
          ['date','hook up'],
-         [/haute /,''],
+         ['haute ',''],
          ['conflict', 'beef'],
          ['long brunch', 'long brew sesh'],
          ['brunch', 'brews'],
@@ -43,7 +43,7 @@ SUBS = [ ["\u0085", '...'],
          ['emotional', 'brahmotional'],
          ['romances', 'bang sessions'],
          ['romance ', 'bang sesh'],
-         ['relationship ','relationship (reminder: bros b4 hoes)']
+         ['relationship ','relationship (reminder: bros b4 hoes) ']
          ].freeze
 
 ROOT_QUERY = <<-SQL
@@ -66,7 +66,7 @@ get '/' do
   @conn.exec_params ROOT_QUERY, [Time.now-(24*60*60)] do |result|
     result.each_row { |row| @scopes << parse_row(row) }
   end
-  haml :home, format: :html5, locals: { scopes: @scopes }
+  erb :home, format: :html5, locals: { scopes: @scopes }
 end
 
 def parse_row(row)
