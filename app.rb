@@ -42,9 +42,8 @@ SUBS = [ ["\u0085", '...'],
          ['emotions', 'bromotions'],
          ['emotional', 'brahmotional'],
          ['romances', 'bang sessions'],
-         ['romance', 'bang sesh'],
-         ['relationships','relationships (reminder: bros b4 hoes)'],
-         ['relationship','relationship (reminder: bros b4 hoes)']
+         ['romance ', 'bang sesh'],
+         ['relationship ','relationship (reminder: bros b4 hoes)']
          ].freeze
 
 ROOT_QUERY = <<-SQL
