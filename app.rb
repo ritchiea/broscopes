@@ -43,6 +43,7 @@ SUBS = [ ["\u0085", '...'],
          ['emotional', 'brahmotional'],
          ['romances', 'bang sessions'],
          ['romance', 'bang sesh'],
+         ['relationships','relationships (reminder: bros b4 hoes)'],
          ['relationship','relationship (reminder: bros b4 hoes)']
          ].freeze
 
