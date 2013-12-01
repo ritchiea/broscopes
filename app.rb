@@ -10,28 +10,40 @@ end
 
 include PgConnect
 
-SUBS = [ ['Aquarius','Broquarius'],
-         ['friend','brah'],
+SUBS = [ ["\u0085", '...'],
+         ["\u0092", "'"],
+         ['Aquarius','Broquarius'],
+         [/ friend[^l]/,' brah'],
+         ['object of your affections', 'those digits from last weekend'],
          ['single','eligible'],
          ['money','stacks'],
          ['Leo','Lebro'],
          ['friends','bros'],
          ['dating','hanging out'],
-         ['flirt','hit on'],
+         ['flirt','hollar at'],
          ['salad','burger'],
+         ['yoga studio', 'driving range'],
          ['yoga','golf'],
          ['retail therapy','treat yo self'],
          ['spree', 'sesh'],
-         ['session','sesh'],
+         ['spin class', 'crossfit'],
+         [/\ session\ /,' sesh'],
          ['budget','bank roll'],
          ['Sunday','Sunday Funday'],
          ['conversation','real talk'],
          ['date','hook up'],
+         [/haute /,''],
          ['conflict', 'beef'],
+         ['long brunch', 'long brew sesh'],
+         ['brunch', 'brews'],
          ['sexy', 'smokin'],
-         ['good', 'primo'],
          ['fun', 'mad fun'],
-         ['relationship','relationship (bros b4 hoes)']
+         ['tension', 'heat'],
+         ['emotions', 'bromotions'],
+         ['emotional', 'brahmotional'],
+         ['romances', 'bang sessions'],
+         ['romance', 'bang sesh'],
+         ['relationship','relationship (reminder: bros b4 hoes)']
          ].freeze
 
 ROOT_QUERY = <<-SQL
@@ -52,7 +64,7 @@ end
 get '/' do
   @scopes = []
   @conn.exec_params ROOT_QUERY, [Time.now-(24*60*60)] do |result|
-    result.each_row { |row| puts "HOROSCOPE for #{row[2]}...\n#{row[1]}"; @scopes << parse_row(row) }
+    result.each_row { |row| @scopes << parse_row(row) }
   end
   haml :home, format: :html5, locals: { scopes: @scopes }
 end
